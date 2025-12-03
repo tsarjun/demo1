@@ -16,12 +16,12 @@ stage('compile'){
         sh 'mvn complie'
     }
 }
-tage('test'){
+stage('test'){
     steps{
         sh 'mvn test'
     }
 }
-tage('build'){
+stage('build'){
     steps{
         sh 'mvn clean install'
     }
