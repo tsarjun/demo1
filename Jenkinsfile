@@ -1,34 +1,29 @@
-pipeline {
-
-	agent any
-
-	
-	tools {
-  maven 'm360'
+ipeline { 
+agent any 
+stages {
+    stage ('clone project'){
+        steps {
+            git branch:'master',url:'https://github.com/tsarjun/demo1.git'
+    }
 }
-	
-	parameters {
-  string defaultValue: 'adi', name: 'name', trim: true
+stage('clean'){
+    steps{
+        sh 'mvn clean'
+    }
 }
-	stages {
-	  stage('build') {
-		steps {
-		  sh 'mvn install -DskipTests'
-		}
-	  }
-
-	  stage('test') {
-		  steps {
-				sh 'echo new'
-			}
-		 post {
-			 always{
-				archiveArtifacts artifacts: 'target/**.jar', followSymlinks: false
-			
-			 }
-			}
-	  }
-		
+stage('compile'){
+    steps{
+        sh 'mvn complie'
+    }
 }
-
+tage('test'){
+    steps{
+        sh 'mvn test'
+    }
+}
+tage('build'){
+    steps{
+        sh 'mvn clean install'
+    }
+}
 }
